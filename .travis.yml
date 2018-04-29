@@ -1,0 +1,22 @@
+language: node_js
+
+node_js:
+  - stable
+
+install:
+  - npm install
+  - npm run install:integration
+
+script:
+  - npm run test
+
+after_success:
+  - npm run build:all
+
+deploy:
+  local_dir: src/test/integration/dist
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  on:
+    branch: master

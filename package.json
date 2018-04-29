@@ -1,0 +1,65 @@
+{
+  "name": "input-senders",
+  "version": "1.0.0",
+  "description": "input-senders",
+  "main": "dist/lib.cjs.js",
+  "module": "dist/lib.esm.js",
+  "typings": "./dist/typings/Lib.d.ts",
+  "scripts": {
+    "install:integration": "cd src/test/integration && npm install",
+    "clean:all": "npm-run-all clean clean:integration",
+    "build:all": "npm-run-all build build:integration",
+    "strip:all": "npm-run-all clean:all strip strip:integration",
+    "strip": "rimraf ./node_modules",
+    "strip:integration": "cd src/test/integration && npm run strip",
+    "clean": "rimraf ./dist",
+    "build": "npm-run-all clean rollup:build",
+    "build:integration": "npm-run-all clean:integration _build:integration",
+    "_build:integration": "cd src/test/integration && npm run build",
+    "clean:integration": "cd src/test/integration && npm run clean",
+    "dev": "npm-run-all -s clean -p rollup:watch",
+    "rollup:build": "cross-env NODE_ENV=production rollup -c",
+    "rollup:watch": "cross-env NODE_ENV=production rollup -c -w",
+    "test": "jest",
+    "test:clear": "jest --clearCache"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ]
+  },
+  "author": "David Komer",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "22.2.3",
+    "@types/node": "10.0.0",
+    "chokidar": "2.0.3",
+    "cross-env": "5.1.4",
+    "glob": "7.1.2",
+    "jest": "22.4.3",
+    "minify": "3.0.5",
+    "npm-run-all": "4.1.2",
+    "rimraf": "2.6.2",
+    "rollup": "0.58.2",
+    "rollup-plugin-commonjs": "9.1.0",
+    "rollup-plugin-node-resolve": "3.3.0",
+    "rollup-plugin-postcss": "^1.6.1",
+    "rollup-plugin-replace": "2.0.0",
+    "rollup-plugin-typescript2": "0.13.0",
+    "rollup-plugin-uglify": "3.0.0",
+    "shelljs": "0.8.1",
+    "ts-jest": "22.4.4",
+    "ts-node": "6.0.2",
+    "typescript": "2.8.3",
+    "uglify-es": "3.3.9"
+  },
+  "dependencies": {}
+}
