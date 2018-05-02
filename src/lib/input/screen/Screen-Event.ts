@@ -72,5 +72,5 @@ export const startScreen = (_opts?:ScreenEventOptions) => (send:InputSender) => 
         })
     }
 
-    return window.removeEventListener("resize", sendEvent, capture);
+    return () => window.removeEventListener("resize", sendEvent, capture);
 }
